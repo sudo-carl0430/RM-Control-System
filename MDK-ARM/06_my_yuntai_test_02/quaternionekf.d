@@ -1,0 +1,16 @@
+06_my_yuntai_test_02\quaternionekf.o: ..\other\QuaternionEKF.c
+06_my_yuntai_test_02\quaternionekf.o: ..\other\QuaternionEKF.h
+06_my_yuntai_test_02\quaternionekf.o: ..\other\kalman_filter.h
+06_my_yuntai_test_02\quaternionekf.o: ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h
+06_my_yuntai_test_02\quaternionekf.o: ../Drivers/CMSIS/Include/core_cm4.h
+06_my_yuntai_test_02\quaternionekf.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+06_my_yuntai_test_02\quaternionekf.o: ../Drivers/CMSIS/Include/cmsis_version.h
+06_my_yuntai_test_02\quaternionekf.o: ../Drivers/CMSIS/Include/cmsis_compiler.h
+06_my_yuntai_test_02\quaternionekf.o: ../Drivers/CMSIS/Include/cmsis_armcc.h
+06_my_yuntai_test_02\quaternionekf.o: ../Drivers/CMSIS/Include/mpu_armv7.h
+06_my_yuntai_test_02\quaternionekf.o: ../Drivers/CMSIS/Device/ST/STM32F4xx/Include/system_stm32f4xx.h
+06_my_yuntai_test_02\quaternionekf.o: ../Drivers/CMSIS/DSP/Include/arm_math.h
+06_my_yuntai_test_02\quaternionekf.o: ../Drivers/CMSIS/Include/core_cm4.h
+06_my_yuntai_test_02\quaternionekf.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+06_my_yuntai_test_02\quaternionekf.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
+06_my_yuntai_test_02\quaternionekf.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h

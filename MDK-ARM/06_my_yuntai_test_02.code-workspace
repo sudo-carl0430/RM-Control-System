@@ -1,0 +1,17 @@
+{
+    "folders": [
+        {
+            "path": "."
+        }
+    ],
+    "settings": {
+        "files.associations": {
+            "gimbal.h": "c",
+            "robot_cmd.h": "c",
+            "bsp_usart.h": "c",
+            "master_process.h": "c",
+            "chassis.h": "c"
+        }
+    },
+    "extensions": {}
+}

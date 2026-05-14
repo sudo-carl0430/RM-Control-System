@@ -1,0 +1,385 @@
+<html>
+<body>
+<pre>
+<h1>�Vision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: ��Vision V5.24.2.0
+Copyright (C) 2017 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: 1 1, 1, LIC=585FJ-U33J5-Z9WG9-44ZAP-EGB9V-A6716
+ 
+Tool Versions:
+Toolchain:       MDK-ARM Plus  Version: 5.24.1
+Toolchain Path:  d:\Keil_v5\ARM\ARMCC\Bin
+C Compiler:      Armcc.exe V5.06 update 5 (build 528)
+Assembler:       Armasm.exe V5.06 update 5 (build 528)
+Linker/Locator:  ArmLink.exe V5.06 update 5 (build 528)
+Library Manager: ArmAr.exe V5.06 update 5 (build 528)
+Hex Converter:   FromElf.exe V5.06 update 5 (build 528)
+CPU DLL:         SARMCM3.DLL V5.24.1
+Dialog DLL:      DCM.DLL V1.16.0.0
+Target DLL:      CMSIS_AGDI.dll V1.28.3.0
+Dialog DLL:      TCM.DLL V1.32.0.0
+ 
+<h2>Project:</h2>
+F:\robomaster\Electric control\my robomaster\2026RM\Omnidirectional_wheel_code\01_Release_Version_8\MDK-ARM\06_my_yuntai_test_02.uvprojx
+Project File Date:  05/07/2026
+
+<h2>Output:</h2>
+*** Using Compiler 'V5.06 update 5 (build 528)', folder: 'd:\Keil_v5\ARM\ARMCC\Bin'
+Rebuild target '06_my_yuntai_test_02'
+assembling startup_stm32f407xx.s...
+compiling dma.c...
+compiling crc.c...
+compiling usart.c...
+compiling stm32f4xx_hal_msp.c...
+compiling can.c...
+compiling rng.c...
+compiling stm32f4xx_it.c...
+compiling i2c.c...
+compiling gpio.c...
+compiling rtc.c...
+compiling tim.c...
+compiling spi.c...
+compiling main.c...
+../other/robot.h(5): warning:  #1295-D: Deprecated declaration robot_init - give arg types
+  void robot_init();
+../other/robot.h(7): warning:  #1-D: last line of file ends without a newline
+  #endif // !GIMBAL_CMD_H
+../Core/Src/main.c: 2 warnings, 0 errors
+compiling freertos.c...
+../other/robot.h(5): warning:  #1295-D: Deprecated declaration robot_init - give arg types
+  void robot_init();
+../other/robot.h(7): warning:  #1-D: last line of file ends without a newline
+  #endif // !GIMBAL_CMD_H
+../other/robot_def.h(232): warning:  #381-D: extra ";" ignored
+      Self_Color_e self_color;;   // 0 for blue, 1 for red
+../other/referee_task.h(17): warning:  #1295-D: Deprecated declaration My_UI_init - give arg types
+  void My_UI_init();
+../other/referee_task.h(23): warning:  #1295-D: Deprecated declaration Referee_Interactive_task - give arg types
+  void Referee_Interactive_task();
+../other/bsp_pwm.h(91): warning:  #1-D: last line of file ends without a newline
+  #endif // BSP_PWM_H
+../other/buzzer.h(56): warning:  #1295-D: Deprecated declaration BuzzerInit - give arg types
+  void BuzzerInit();
+../other/buzzer.h(57): warning:  #1295-D: Deprecated declaration BuzzerTask - give arg types
+  void BuzzerTask();
+../other/power_control.h(44): warning:  #1-D: last line of file ends without a newline
+   
+../Core/Src/freertos.c: 9 warnings, 0 errors
+compiling stm32f4xx_hal_dma.c...
+compiling stm32f4xx_hal_rcc_ex.c...
+compiling stm32f4xx_hal_flash_ramfunc.c...
+compiling stm32f4xx_hal_pcd_ex.c...
+compiling stm32f4xx_hal_pcd.c...
+compiling stm32f4xx_hal_flash_ex.c...
+compiling stm32f4xx_hal_gpio.c...
+compiling stm32f4xx_hal_flash.c...
+compiling stm32f4xx_hal_timebase_tim.c...
+compiling stm32f4xx_hal_dma_ex.c...
+compiling stm32f4xx_hal_tim_ex.c...
+compiling stm32f4xx_hal_rcc.c...
+compiling stm32f4xx_ll_usb.c...
+compiling stm32f4xx_hal_tim.c...
+compiling stm32f4xx_hal_rng.c...
+compiling stm32f4xx_hal.c...
+compiling stm32f4xx_hal_exti.c...
+compiling croutine.c...
+compiling stm32f4xx_hal_crc.c...
+compiling stm32f4xx_hal_i2c_ex.c...
+compiling stm32f4xx_hal_rtc.c...
+compiling stm32f4xx_hal_pwr.c...
+compiling stm32f4xx_hal_pwr_ex.c...
+compiling stm32f4xx_hal_rtc_ex.c...
+compiling stm32f4xx_hal_cortex.c...
+compiling stm32f4xx_hal_can.c...
+compiling event_groups.c...
+compiling stm32f4xx_hal_uart.c...
+compiling list.c...
+compiling queue.c...
+compiling timers.c...
+compiling stream_buffer.c...
+compiling stm32f4xx_hal_spi.c...
+compiling heap_4.c...
+compiling tasks.c...
+compiling port.c...
+compiling message_center.c...
+compiling cmsis_os.c...
+compiling stm32f4xx_hal_i2c.c...
+compiling motor_task.c...
+compiling system_stm32f4xx.c...
+compiling bsp_dwt.c...
+compiling bsp_usart.c...
+compiling daemon.c...
+compiling bsp_can.c...
+compiling remote_control.c...
+compiling BMI088driver.c...
+..\other\BMI088driver.c(332): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+          dt = DWT_GetDeltaT(&offset_cal_DWT_Count) * 1000.0;
+..\other\BMI088driver.c(323): warning:  #550-D: variable "dt"  was set but never used
+      static float dt = 1.0;
+..\other\BMI088driver.c: 2 warnings, 0 errors
+compiling dji_motor.c...
+compiling controller.c...
+..\other\controller.c(230): warning:  #1-D: last line of file ends without a newline
+  }
+..\other\controller.c(15): warning:  #177-D: variable "cntq"  was declared but never referenced
+  static uint32_t cntq = 0;
+..\other\controller.c: 2 warnings, 0 errors
+compiling shoot.c...
+..\other\robot_def.h(232): warning:  #381-D: extra ";" ignored
+      Self_Color_e self_color;;   // 0 for blue, 1 for red
+..\other\shoot.c(39): warning:  #188-D: enumerated type mixed with another type
+                  .Improve = PID_Integral_Limit| PID_Trapezoid_Intergral | PID_DerivativeFilter,
+..\other\shoot.c(58): warning:  #188-D: enumerated type mixed with another type
+              .close_loop_type = SPEED_LOOP | CURRENT_LOOP ,
+..\other\shoot.c(102): warning:  #188-D: enumerated type mixed with another type
+                  .Improve = PID_Integral_Limit |PID_ErrorHandle,
+..\other\shoot.c(119): warning:  #188-D: enumerated type mixed with another type
+              .close_loop_type = SPEED_LOOP|CURRENT_LOOP,
+..\other\shoot.c(20): warning:  #177-D: variable "hibernate_time"  was declared but never referenced
+  static float hibernate_time = 0, dead_time = 0;
+..\other\shoot.c(20): warning:  #177-D: variable "dead_time"  was declared but never referenced
+  static float hibernate_time = 0, dead_time = 0;
+..\other\shoot.c(21): warning:  #177-D: variable "load_angle_set"  was declared but never referenced
+  static float load_angle_set = 0;
+..\other\shoot.c: 8 warnings, 0 errors
+compiling chassis.c...
+..\other\robot_def.h(232): warning:  #381-D: extra ";" ignored
+      Self_Color_e self_color;;   // 0 for blue, 1 for red
+..\other\power_control.h(44): warning:  #1-D: last line of file ends without a newline
+   
+..\other\referee_task.h(17): warning:  #1295-D: Deprecated declaration My_UI_init - give arg types
+  void My_UI_init();
+..\other\referee_task.h(23): warning:  #1295-D: Deprecated declaration Referee_Interactive_task - give arg types
+  void Referee_Interactive_task();
+..\other\alg_slope.h(101): warning:  #1-D: last line of file ends without a newline
+  #endif /* ALG_SLOPE_H */
+..\other\chassis.c(94): warning:  #188-D: enumerated type mixed with another type
+                  .Improve = PID_Trapezoid_Intergral | PID_Integral_Limit | PID_Derivative_On_Measurement | PID_OutputFilter,
+..\other\chassis.c(102): warning:  #188-D: enumerated type mixed with another type
+                  .Improve = PID_Trapezoid_Intergral | PID_Integral_Limit | PID_Derivative_On_Measurement,
+..\other\chassis.c(110): warning:  #188-D: enumerated type mixed with another type
+              .close_loop_type = SPEED_LOOP | CURRENT_LOOP,
+..\other\chassis.c(373): warning:  #188-D: enumerated type mixed with another type
+      chassis_feedback_data.bullet_speed = referee_data->ShootData.bullet_speed;
+..\other\chassis.c(37): warning:  #177-D: variable "slope_vx"  was declared but never referenced
+  static Class_Slope_t slope_vx;
+..\other\chassis.c(38): warning:  #177-D: variable "slope_vy"  was declared but never referenced
+  static Class_Slope_t slope_vy;
+..\other\chassis.c(39): warning:  #177-D: variable "slope_wz"  was declared but never referenced
+  static Class_Slope_t slope_wz;
+..\other\chassis.c(56): warning:  #177-D: variable "rotate_speed_buff"  was declared but never referenced
+  static float rotate_speed_buff = 0;
+..\other\chassis.c(62): warning:  #177-D: variable "limit_power"  was declared but never referenced
+  static float limit_power; // 限制的功�?
+..\other\chassis.c(64): warning:  #177-D: variable "referee_real_power"  was declared but never referenced
+  static float referee_real_power; // 缓冲的功�?
+..\other\chassis.c: 15 warnings, 0 errors
+compiling robot_cmd.c...
+..\other\robot_def.h(232): warning:  #381-D: extra ";" ignored
+      Self_Color_e self_color;;   // 0 for blue, 1 for red
+..\other\robot_cmd.c(13): warning:  #177-D: variable "executed"  was declared but never referenced
+  static uint8_t executed = 0;
+..\other\robot_cmd.c(14): warning:  #177-D: variable "reset_triggered"  was declared but never referenced
+  static uint8_t reset_triggered;
+..\other\robot_cmd.c(15): warning:  #550-D: variable "mouse_friction_state"  was set but never used
+  static uint8_t Friction_signal = 0, Last_Friction_signal = 0, mouse_friction_state = 0, last_b_press = 0; // 0=关闭, 1=打开;
+..\other\robot_cmd.c(15): warning:  #550-D: variable "last_b_press"  was set but never used
+  static uint8_t Friction_signal = 0, Last_Friction_signal = 0, mouse_friction_state = 0, last_b_press = 0; // 0=关闭, 1=打开;
+..\other\robot_cmd.c(39): warning:  #177-D: variable "robot_state"  was declared but never referenced
+  static Robot_Status_e robot_state; // 机器人整体工作状�?
+..\other\robot_cmd.c(41): warning:  #177-D: variable "chassis_speed_buff"  was declared but never referenced
+  static float chassis_speed_buff;
+..\other\robot_cmd.c(45): warning:  #177-D: variable "vision_send_data"  was declared but never referenced
+  static Vision_Send_s vision_send_data;  // 视觉发送数�?
+..\other\robot_cmd.c(99): warning:  #177-D: function "fn_Limit"  was declared but never referenced
+  static void fn_Limit(float *value, float lower, float upper)
+..\other\robot_cmd.c(111): warning:  #177-D: function "Calorie_control"  was declared but never referenced
+  static float Calorie_control()
+..\other\robot_cmd.c: 10 warnings, 0 errors
+compiling gimbal.c...
+..\other\robot_def.h(232): warning:  #381-D: extra ";" ignored
+      Self_Color_e self_color;;   // 0 for blue, 1 for red
+..\other\bsp_pwm.h(91): warning:  #1-D: last line of file ends without a newline
+  #endif // BSP_PWM_H
+..\other\buzzer.h(56): warning:  #1295-D: Deprecated declaration BuzzerInit - give arg types
+  void BuzzerInit();
+..\other\buzzer.h(57): warning:  #1295-D: Deprecated declaration BuzzerTask - give arg types
+  void BuzzerTask();
+..\other\dm_imu.h(43): warning:  #1-D: last line of file ends without a newline
+  #endif /* __DM_IMU_H */
+..\other\vofa.h(21): warning:  #1-D: last line of file ends without a newline
+  #endif // !1#define 
+..\other\gimbal.c(89): warning:  #188-D: enumerated type mixed with another type
+                  .Improve = PID_Integral_Limit | PID_Trapezoid_Intergral | PID_OutputFilter | PID_ChangingIntegrationRate | PID_IntegralSeparation,
+..\other\gimbal.c(98): warning:  #188-D: enumerated type mixed with another type
+                  .Improve = PID_Integral_Limit | PID_IntegralSeparation,
+..\other\gimbal.c(109): warning:  #188-D: enumerated type mixed with another type
+              .close_loop_type = ANGLE_LOOP | SPEED_LOOP, // 使用的是哪几个pid闭环
+..\other\gimbal.c(128): warning:  #188-D: enumerated type mixed with another type
+                  .Improve = PID_Integral_Limit | PID_Trapezoid_Intergral,
+..\other\gimbal.c(148): warning:  #188-D: enumerated type mixed with another type
+              .close_loop_type = ANGLE_LOOP | SPEED_LOOP,
+..\other\gimbal.c(40): warning:  #177-D: variable "buzzer"  was declared but never referenced
+  static BuzzzerInstance *buzzer;
+..\other\gimbal.c(54): warning:  #177-D: variable "yaw_gyro_feedfofard"  was declared but never referenced
+  static float yaw_gyro_feedfofard = -0.472267985;
+..\other\gimbal.c(55): warning:  #177-D: variable "pitch_gyro_feedfofard"  was declared but never referenced
+  static float pitch_gyro_feedfofard = 0.5;
+..\other\gimbal.c: 14 warnings, 0 errors
+compiling robot.c...
+..\other\robot_def.h(232): warning:  #381-D: extra ";" ignored
+      Self_Color_e self_color;;   // 0 for blue, 1 for red
+..\other\dm_imu.h(43): warning:  #1-D: last line of file ends without a newline
+  #endif /* __DM_IMU_H */
+..\other\robot.c(22): warning:  #1-D: last line of file ends without a newline
+  }
+..\other\robot.c: 3 warnings, 0 errors
+compiling crc_ref.c...
+compiling referee_communication.c...
+compiling kalman_filter.c...
+compiling QuaternionEKF.c...
+compiling BMI088Middleware.c...
+compiling crc8.c...
+compiling crc16.c...
+compiling bsp_temperature.c...
+compiling seasky_protocol.c...
+..\other\seasky_protocol.c(133): warning:  #111-D: statement is unreachable
+      return 0;
+..\other\seasky_protocol.c(121): warning:  #550-D: variable "date_length"  was set but never used
+      static uint16_t date_length;
+..\other\seasky_protocol.c(40): warning:  #177-D: function "CRC16_Check_Sum"  was declared but never referenced
+  static uint16_t CRC16_Check_Sum(uint8_t *pchMessage, uint32_t dwLength)
+..\other\seasky_protocol.c(52): warning:  #177-D: function "protocol_heade_Check"  was declared but never referenced
+  static uint8_t protocol_heade_Check(protocol_rm_struct *pro, uint8_t *rx_buf)
+..\other\seasky_protocol.c: 4 warnings, 0 errors
+compiling bsp_usb.c...
+compiling alg_slope.c...
+..\other\alg_slope.h(101): warning:  #1-D: last line of file ends without a newline
+  #endif /* ALG_SLOPE_H */
+..\other\alg_slope.c(93): warning:  #1-D: last line of file ends without a newline
+  }
+..\other\alg_slope.c: 2 warnings, 0 errors
+compiling power_control.c...
+..\other\power_control.h(44): warning:  #1-D: last line of file ends without a newline
+   
+..\other\power_control.c(10): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  const float w_transfer = 
+I / 180.0 * 187.0 / 3591.0;
+..\other\power_control.c(109): warning:  #177-D: variable "can_bus"  was declared but never referenced
+                  uint16_t can_bus = config->can_handle == &hcan1 ? 1 : 2;
+..\other\power_control.c(138): warning:  #177-D: variable "can_bus"  was declared but never referenced
+                  uint16_t can_bus = config->can_handle == &hcan1 ? 1 : 2;
+..\other\power_control.c(192): warning:  #177-D: variable "can_bus"  was declared but never referenced
+      uint16_t can_bus = motor->motor_can_instance->can_handle == &hcan1 ? 1 : 2;
+..\other\power_control.c(22): warning:  #177-D: variable "chassis_power"  was declared but never referenced
+  static float chassis_max_power, chassis_power, initial_total_power = 0.0f;
+..\other\power_control.c(23): warning:  #177-D: variable "test_pid_ref"  was declared but never referenced
+  static float test_pid_ref[4];
+..\other\power_control.c(34): warning:  #550-D: variable "delta"  was set but never used
+  static float delta;
+..\other\power_control.c: 8 warnings, 0 errors
+compiling user_lib.c...
+compiling master_process.c...
+..\other\robot_def.h(232): warning:  #381-D: extra ";" ignored
+      Self_Color_e self_color;;   // 0 for blue, 1 for red
+..\other\master_process.c: 1 warning, 0 errors
+compiling referee_task.c...
+..\other\robot_def.h(232): warning:  #381-D: extra ";" ignored
+      Self_Color_e self_color;;   // 0 for blue, 1 for red
+..\other\referee_task.h(17): warning:  #1295-D: Deprecated declaration My_UI_init - give arg types
+  void My_UI_init();
+..\other\referee_task.h(23): warning:  #1295-D: Deprecated declaration Referee_Interactive_task - give arg types
+  void Referee_Interactive_task();
+..\other\referee_task.c(40): warning:  #177-D: function "robot_mode_change"  was declared but never referenced
+  static void robot_mode_change(Referee_Interactive_info_t *_Interactive_data); // 测试用函数，实现模式自动变化
+..\other\referee_task.c: 4 warnings, 0 errors
+compiling referee_UI.c...
+..\other\robot_def.h(232): warning:  #381-D: extra ";" ignored
+      Self_Color_e self_color;;   // 0 for blue, 1 for red
+..\other\referee_UI.c: 1 warning, 0 errors
+compiling ins_task.c...
+..\other\vofa.h(21): warning:  #1-D: last line of file ends without a newline
+  #endif // !1#define 
+..\other\ins_task.c(103): warning:  #188-D: enumerated type mixed with another type
+                                  .Improve = 0x01}; // enable integratiaon limit
+..\other\ins_task.c(30): warning:  #550-D: variable "IMU_Param"  was set but never used
+  static IMU_Param_t IMU_Param;
+..\other\ins_task.c(278): warning:  #177-D: function "IMU_Param_Correction"  was declared but never referenced
+  static void IMU_Param_Correction(IMU_Param_t *param, float gyro[3], float accel[3])
+..\other\ins_task.c: 4 warnings, 0 errors
+compiling bsp_pwm.c...
+..\other\bsp_pwm.h(91): warning:  #1-D: last line of file ends without a newline
+  #endif // BSP_PWM_H
+..\other\bsp_pwm.c(109): warning:  #1-D: last line of file ends without a newline
+  }
+..\other\bsp_pwm.c: 2 warnings, 0 errors
+compiling rm_referee.c...
+..\other\robot_def.h(232): warning:  #381-D: extra ";" ignored
+      Self_Color_e self_color;;   // 0 for blue, 1 for red
+..\other\rm_referee.c: 1 warning, 0 errors
+compiling vofa.c...
+..\other\vofa.h(21): warning:  #1-D: last line of file ends without a newline
+  #endif // !1#define 
+..\other\vofa.c: 1 warning, 0 errors
+compiling usbd_cdc_if.c...
+compiling dm_imu.c...
+..\other\dm_imu.h(43): warning:  #1-D: last line of file ends without a newline
+  #endif /* __DM_IMU_H */
+..\other\dm_imu.c(151): warning:  #1-D: last line of file ends without a newline
+  }
+..\other\dm_imu.c(71): warning:  #177-D: function "imu_read_reg"  was declared but never referenced
+  static void imu_read_reg(uint8_t reg_id) {
+..\other\dm_imu.c(26): warning:  #177-D: function "float_to_uint"  was declared but never referenced
+  static int float_to_uint(float x_float, float x_min, float x_max, int bits) {
+..\other\dm_imu.c: 4 warnings, 0 errors
+compiling usbd_desc.c...
+compiling usb_device.c...
+compiling buzzer.c...
+..\other\bsp_pwm.h(91): warning:  #1-D: last line of file ends without a newline
+  #endif // BSP_PWM_H
+..\other\buzzer.h(56): warning:  #1295-D: Deprecated declaration BuzzerInit - give arg types
+  void BuzzerInit();
+..\other\buzzer.h(57): warning:  #1295-D: Deprecated declaration BuzzerTask - give arg types
+  void BuzzerTask();
+..\other\buzzer.c: 3 warnings, 0 errors
+compiling usbd_ioreq.c...
+compiling usbd_ctlreq.c...
+compiling usbd_core.c...
+compiling usbd_cdc.c...
+compiling usbd_conf.c...
+linking...
+Program Size: Code=93332 RO-data=5120 RW-data=2412 ZI-data=79596  
+FromELF: creating hex file...
+"06_my_yuntai_test_02\06_my_yuntai_test_02.axf" - 0 Error(s), 100 Warning(s).
+
+<h2>Software Packages used:</h2>
+
+Package Vendor: ARM
+                http://www.keil.com/pack/ARM.CMSIS.5.0.1.pack
+                ARM.CMSIS.5.0.1
+                CMSIS (Cortex Microcontroller Software Interface Standard)
+   * Component: DSP Version: 1.5.1
+   * Component: CORE Version: 5.0.1
+
+Package Vendor: Keil
+                http://www.keil.com/pack/Keil.STM32F4xx_DFP.1.0.8.pack
+                Keil.STM32F4xx_DFP.1.0.8
+                STMicroelectronics STM32F4 Series Device Support, Drivers and Examples
+
+<h2>Collection of Component include folders:</h2>
+  .\RTE\_06_my_yuntai_test_02
+  d:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\Include
+  d:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\1.0.8\Device\Include
+
+<h2>Collection of Component Files used:</h2>
+
+   * Component: ARM::CMSIS:DSP:1.5.1
+      Library file:  CMSIS\Lib\ARM\arm_cortexM4lf_math.lib
+      Include file:  CMSIS\Include\arm_math.h
+
+   * Component: ARM::CMSIS:CORE:5.0.1
+Build Time Elapsed:  00:00:41
+</pre>
+</body>
+</html>

@@ -1,0 +1,1 @@
+06_my_yuntai_test_02\startup_stm32f407xx.o: startup_stm32f407xx.s

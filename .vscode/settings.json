@@ -1,0 +1,21 @@
+{
+    "files.associations": {
+        "limits": "c",
+        "type_traits": "c",
+        "bsp_usb.h": "c",
+        "general_def.h": "c",
+        "bsp_usart.h": "c",
+        "vofa.h": "c",
+        "ins_task.h": "c",
+        "tim.h": "c",
+        "usart.h": "c",
+        "rm_referee.h": "c",
+        "bsp_dwt.h": "c",
+        "bmi088middleware.h": "c",
+        "stdint.h": "c",
+        "spi.h": "c",
+        "dm_imu.h": "c",
+        "stm32f4xx_hal.h": "c",
+        "robot_cmd.h": "c"
+    }
+}

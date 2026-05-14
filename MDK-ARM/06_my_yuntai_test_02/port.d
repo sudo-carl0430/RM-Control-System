@@ -1,0 +1,12 @@
+06_my_yuntai_test_02\port.o: ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F/port.c
+06_my_yuntai_test_02\port.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
+06_my_yuntai_test_02\port.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+06_my_yuntai_test_02\port.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+06_my_yuntai_test_02\port.o: ../Core/Inc/FreeRTOSConfig.h
+06_my_yuntai_test_02\port.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
+06_my_yuntai_test_02\port.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h
+06_my_yuntai_test_02\port.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/deprecated_definitions.h
+06_my_yuntai_test_02\port.o: ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F/portmacro.h
+06_my_yuntai_test_02\port.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h
+06_my_yuntai_test_02\port.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h
+06_my_yuntai_test_02\port.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h
