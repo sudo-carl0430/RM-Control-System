@@ -266,8 +266,8 @@ void GimbalTask() {
     debug_gyro[7] = gimbal_cmd_recv.yaw;
 
     // DJIMotorSetRef(pitch_motor, debug_send_pitch_data);
-    DJIMotorSetRef(pitch_motor,180); // yaw和pitch会在robot_cmd中处理好多圈和单圈
-    DJIMotorSetRef(yaw_motor, debug_dm1); // yaw和pitch会在robot_cmd中处理好多圈和单圈，设置电机目标值，如果外层是角度环则设的是目标角度，速度同理，dji_motor.c里会处理好pid计算
+    DJIMotorSetRef(pitch_motor,gimbal_cmd_recv.pitch); // yaw和pitch会在robot_cmd中处理好多圈和单圈
+    DJIMotorSetRef(yaw_motor, gimbal_cmd_recv.yaw); // yaw和pitch会在robot_cmd中处理好多圈和单圈，设置电机目标值，如果外层是角度环则设的是目标角度，速度同理，dji_motor.c里会处理好pid计算
 
     // 设置反馈数据,主要是imu和yaw的ecd
     gimbal_feedback_data.yaw_motor_single_round_angle = yaw_motor->measure.angle_single_round; // 把yaw轴编码器的值发到处理中心，用于坐标系转化
