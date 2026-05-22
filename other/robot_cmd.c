@@ -9,8 +9,6 @@
 #include <stdbool.h> 
 //123
 
-float debug_yaw[3];
-static uint8_t executed = 0;
 static uint8_t reset_triggered;
 static uint8_t Friction_signal = 0, Last_Friction_signal = 0, mouse_friction_state = 0, last_b_press = 0; // 0=关闭, 1=打开;
 
@@ -153,34 +151,54 @@ static void RemoteControlSet()
     // 左侧开关状态为[下],或视觉未识别到目标,纯遥控器拨杆控制
     if (switch_is_down(rc_data[TEMP].rc.switch_left))
     {
+
+
+        static float pitch_dir = 1.0f;
+    
+   // gimbal_cmd_send.pitch += pitch_dir * 0.3f;
+    if (gimbal_cmd_send.pitch > 202.0f) {
+        gimbal_cmd_send.pitch = 202.0f;
+        pitch_dir = -1.0f;
+    } else if (gimbal_cmd_send.pitch < 143.0f) {
+        gimbal_cmd_send.pitch = 143.0f;
+        pitch_dir = 1.0f;
+    }
+    
+      float yaw_aim_aps = 0.6f;
+      gimbal_cmd_send.yaw += yaw_aim_aps;
+
+      gimbal_cmd_send.pitch += pitch_dir * 0.8f;
+
         // 按照摇杆的输出大小进行角度增量,增益系数需调整
-//        gimbal_cmd_send.pitch = -(float)(0.04924 * (double)rc_data[TEMP].rc.rocker_l1) + 180;
-        // gimbal_cmd_send.pitch = -(double)rc_data[TEMP].rc.rocker_l1*0.049242424+114.5;
-        // gimbal_cmd_send.pitch=180;
-        // gimbal_cmd_send.pitch += -(float)(0.001 * (double)rc_data[TEMP].rc.rocker_l1);
-//        gimbal_cmd_send.yaw += -(float)(0.003 * (double)rc_data[TEMP].rc.rocker_l_);
-        // 摇杆控制的软件限位
-        // if (gimbal_cmd_send.pitch <= 140)
+        // gimbal_cmd_send.pitch = -(float)(0.04924 * (double)rc_data[TEMP].rc.rocker_l1) + 180;
+        // gimbal_cmd_send.yaw += -(float)(0.003 * (double)rc_data[TEMP].rc.rocker_l_);
+        
+        if (gimbal_cmd_send.pitch <= 140)
+        {
+            gimbal_cmd_send.pitch = 140;
+        }
+        else if (gimbal_cmd_send.pitch >= 205)
+        {
+            gimbal_cmd_send.pitch = 205;
+        }//这里不适合用imu反馈的角度限制，应该用电机编码器
+
+
+        // if (ecd <= ecddd*dddddd)
         // {
-        //     gimbal_cmd_send.pitch = 140;
+        //     gimbal_cmd_send.pitch = ecdddd*ddddd;
         // }
         // else if (gimbal_cmd_send.pitch >= 205)
         // {
         //     gimbal_cmd_send.pitch = 205;
-        // }
+        // }//这里不适合用imu反馈的角度限制，应该用电机编码器
 
-         debug_yaw[0] = vision_recv_data->pitch;
-         gimbal_cmd_send.pitch = debug_yaw[0];
 
-         debug_yaw[1] = vision_recv_data->yaw;
-         gimbal_cmd_send.yaw = debug_yaw[1];
-         
 
     }
 
     // 底盘参数,目前没有加入小陀螺(调试似乎暂时没有必要),系数需要调整
-    chassis_cmd_send.vx = 40.0f * (float)rc_data[TEMP].rc.rocker_r_;  // _水平方向
-    chassis_cmd_send.vy = 40.0f * (float)rc_data[TEMP].rc.rocker_r1; // 1数值方向
+    chassis_cmd_send.vx = 80.0f * (float)rc_data[TEMP].rc.rocker_r_;  // _水平方向
+    chassis_cmd_send.vy = 80.0f * (float)rc_data[TEMP].rc.rocker_r1; // 1数值方向
 
     uint8_t current_high = (rc_data[TEMP].rc.dial > 500) ? 1 : 0;
     if (current_high && !Last_Friction_signal)
@@ -229,117 +247,110 @@ static void RemoteControlSet()
 static void MouseKeySet()
 {
 
-  //  gimbal_cmd_send.pitch = vision_recv_data->pitch;
+ //   gimbal_cmd_send.pitch = 180;
+    chassis_speed_buff = 55000;
 
-//     // gimbal_cmd_send.pitch = 180;
-//     chassis_speed_buff = 55000;
+    chassis_cmd_send.chassis_power_buff = 1;
+    gimbal_cmd_send.gimbal_mode = GIMBAL_FREE_MODE;
+    chassis_cmd_send.vy = rc_data[TEMP].key[KEY_PRESS].w * chassis_speed_buff - rc_data[TEMP].key[KEY_PRESS].s * chassis_speed_buff; // 系数待测
+    chassis_cmd_send.vx = rc_data[TEMP].key[KEY_PRESS].a * chassis_speed_buff - rc_data[TEMP].key[KEY_PRESS].d * chassis_speed_buff;
 
-//     chassis_cmd_send.chassis_power_buff = 1;
-//     gimbal_cmd_send.gimbal_mode = GIMBAL_FREE_MODE;
-//     chassis_cmd_send.vy = rc_data[TEMP].key[KEY_PRESS].w * chassis_speed_buff - rc_data[TEMP].key[KEY_PRESS].s * chassis_speed_buff; // 系数待测
-//     chassis_cmd_send.vx = rc_data[TEMP].key[KEY_PRESS].a * chassis_speed_buff - rc_data[TEMP].key[KEY_PRESS].d * chassis_speed_buff;
+    switch (rc_data[TEMP].mouse.press_l) // 鼠标左键射击
+    {
+    case 0:
+        shoot_cmd_send.load_mode = LOAD_STOP;
+        break;
+    default:
+        // 左键按下，检查摩擦轮速度,防止没开摩擦轮就拨弹导致卡弹
+        if (shoot_fetch_data.friction_speed > 20000)
+        {
+            shoot_cmd_send.load_mode = LOAD_BURSTFIRE;
+            // shoot_cmd_send.shoot_rate = Calorie_control();
+            shoot_cmd_send.shoot_rate = 15;
+        }
+        else
+        {
+            shoot_cmd_send.load_mode = LOAD_STOP;
+        }
+        break;
+    }
 
-//     switch (rc_data[TEMP].mouse.press_l) // 鼠标左键射击
-//     {
-//     case 0:
-//         shoot_cmd_send.load_mode = LOAD_STOP;
-//         break;
-//     default:
-//         // 左键按下，检查摩擦轮速度,防止没开摩擦轮就拨弹导致卡弹
-//         if (shoot_fetch_data.friction_speed > 20000)
-//         {
-//             shoot_cmd_send.load_mode = LOAD_BURSTFIRE;
-//             // shoot_cmd_send.shoot_rate = Calorie_control();
-//             shoot_cmd_send.shoot_rate = 15;
-//         }
-//         else
-//         {
-//             shoot_cmd_send.load_mode = LOAD_STOP;
-//         }
-//         break;
-//     }
+    switch (rc_data[TEMP].key[KEY_PRESS].x) // X键刷新UI
+    {
+    case 1:
+        chassis_cmd_send.ui_mode = UI_REFRESH;
+        break;
 
-//     switch (rc_data[TEMP].key[KEY_PRESS].x) // X键刷新UI
-//     {
-//     case 1:
-//         chassis_cmd_send.ui_mode = UI_REFRESH;
-//         break;
+    default:
+        chassis_cmd_send.ui_mode = UI_KEEP;
+        break;
+    }
 
-//     default:
-//         chassis_cmd_send.ui_mode = UI_KEEP;
-//         break;
-//     }
+#ifdef ROBOT_OMNIDIRECTIONAL
+    gimbal_cmd_send.pitch -= (float)rc_data[TEMP].mouse.y / 660 * 8; // 加减待测,全向轮是-,麦轮是+
+#endif
 
-// #ifdef ROBOT_OMNIDIRECTIONAL
-//     gimbal_cmd_send.pitch -= (float)rc_data[TEMP].mouse.y / 660 * 8; // 加减待测,全向轮是-,麦轮是+
-// #endif
+#ifdef ROBOT_MECANUM
+    gimbal_cmd_send.pitch -= (float)rc_data[TEMP].mouse.y / 660 * 8; // 加减待测,全向轮是-,麦轮是+
+#endif
 
-// #ifdef ROBOT_MECANUM
-//     gimbal_cmd_send.pitch -= (float)rc_data[TEMP].mouse.y / 660 * 8; // 加减待测,全向轮是-,麦轮是+
-// #endif
+    if (gimbal_cmd_send.pitch <= 140)
+    {
+        gimbal_cmd_send.pitch = 140;
+    }
+    else if (gimbal_cmd_send.pitch >= 205)
+    {
+        gimbal_cmd_send.pitch = 205;
+    }
 
-//     if (gimbal_cmd_send.pitch <= 140)
-//     {
-//         gimbal_cmd_send.pitch = 140;
-//     }
-//     else if (gimbal_cmd_send.pitch >= 205)
-//     {
-//         gimbal_cmd_send.pitch = 205;
-//     }
+    gimbal_cmd_send.yaw -= (float)rc_data[TEMP].mouse.x / 660 * 8; // 系数待测
 
-//     gimbal_cmd_send.yaw -= (float)rc_data[TEMP].mouse.x / 660 * 8; // 系数待测
+    // 检测 B 键的上升沿（按下瞬间）
+    uint8_t b_press = rc_data[TEMP].key[KEY_PRESS].b; // 假设 key 结构中有 b 字段
+    if (b_press && !last_b_press)
+    {
+        mouse_friction_state = !mouse_friction_state; // 切换摩擦轮开关
+    }
+    last_b_press = b_press;
+    shoot_cmd_send.friction_mode = mouse_friction_state ? FRICTION_ON : FRICTION_OFF;
 
-//     // 检测 B 键的上升沿（按下瞬间）
-//     uint8_t b_press = rc_data[TEMP].key[KEY_PRESS].b; // 假设 key 结构中有 b 字段
-//     if (b_press && !last_b_press)
-//     {
-//         mouse_friction_state = !mouse_friction_state; // 切换摩擦轮开关
-//     }
-//     last_b_press = b_press;
-//     shoot_cmd_send.friction_mode = mouse_friction_state ? FRICTION_ON : FRICTION_OFF;
-
-//     switch (rc_data[TEMP].key_count[KEY_PRESS][Key_Q] % 2) // Q键设置底盘运动模式为小陀螺模式
-//     {
-//     case 0:
-//         chassis_cmd_send.chassis_mode = CHASSIS_FOLLOW_GIMBAL_YAW;
-//         break;
-//     default:
-//         chassis_cmd_send.chassis_mode = CHASSIS_ROTATE;
-//         break;
-//     }
+    switch (rc_data[TEMP].key_count[KEY_PRESS][Key_Q] % 2) // Q键设置底盘运动模式为小陀螺模式
+    {
+    case 0:
+        chassis_cmd_send.chassis_mode = CHASSIS_FOLLOW_GIMBAL_YAW;
+        break;
+    default:
+        chassis_cmd_send.chassis_mode = CHASSIS_ROTATE;
+        break;
+    }
 
 
-//     switch (rc_data[TEMP].key_count[KEY_PRESS][Key_E] % 2) // Q键设置底盘运动模式为小陀螺模式
-//     {
-//     case 0:
-//         chassis_cmd_send.chassis_mode = CHASSIS_FOLLOW_GIMBAL_YAW;
-//         break;
-//     default:
-//         chassis_cmd_send.chassis_mode = CHASSIS_ROTATE_REVERSE;
-//         break;
-//     }
+    switch (rc_data[TEMP].key_count[KEY_PRESS][Key_E] % 2) // Q键设置底盘运动模式为小陀螺模式
+    {
+    case 0:
+        chassis_cmd_send.chassis_mode = CHASSIS_FOLLOW_GIMBAL_YAW;
+        break;
+    default:
+        chassis_cmd_send.chassis_mode = CHASSIS_ROTATE_REVERSE;
+        break;
+    }
 
     
 
-//     switch (rc_data[TEMP].key_count[KEY_PRESS_WITH_CTRL][Key_X])
-//     {
-//     case 1:
-//         if (!reset_triggered)
-//         {
-//             reset_triggered = 1;          // 防止本次按压期间重复调用
-//             NVIC_SystemReset();           // 系统复位，不会返回
-//         }
-//         break;
-//     default:
-//         // 组合键未完全按下时，复位标志清零，允许下次再次触发
-//         reset_triggered = 0;
-//         break;
-//     }
-
-
-
-
-
+    switch (rc_data[TEMP].key_count[KEY_PRESS_WITH_CTRL][Key_X])
+    {
+    case 1:
+        if (!reset_triggered)
+        {
+            reset_triggered = 1;          // 防止本次按压期间重复调用
+            NVIC_SystemReset();           // 系统复位，不会返回
+        }
+        break;
+    default:
+        // 组合键未完全按下时，复位标志清零，允许下次再次触发
+        reset_triggered = 0;
+        break;
+    }
 }
 
 /**

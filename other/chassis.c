@@ -131,20 +131,20 @@ void ChassisInit() {
 #endif
 
 #ifdef ROBOT_OMNIDIRECTIONAL
-    chassis_motor_config.can_init_config.tx_id = 2;
-    chassis_motor_config.controller_setting_init_config.motor_reverse_flag = MOTOR_DIRECTION_REVERSE;
+    chassis_motor_config.can_init_config.tx_id = 4;
+    chassis_motor_config.controller_setting_init_config.motor_reverse_flag = MOTOR_DIRECTION_NORMAL;
     motor_lf = DJIMotorInit(&chassis_motor_config);
 
     chassis_motor_config.can_init_config.tx_id = 1;
-    chassis_motor_config.controller_setting_init_config.motor_reverse_flag = MOTOR_DIRECTION_NORMAL;
+    chassis_motor_config.controller_setting_init_config.motor_reverse_flag = MOTOR_DIRECTION_REVERSE;
     motor_rf = DJIMotorInit(&chassis_motor_config);
+
+    chassis_motor_config.can_init_config.tx_id = 2;
+    chassis_motor_config.controller_setting_init_config.motor_reverse_flag = MOTOR_DIRECTION_NORMAL;
+    motor_lb = DJIMotorInit(&chassis_motor_config);
 
     chassis_motor_config.can_init_config.tx_id = 3;
     chassis_motor_config.controller_setting_init_config.motor_reverse_flag = MOTOR_DIRECTION_REVERSE;
-    motor_lb = DJIMotorInit(&chassis_motor_config);
-
-    chassis_motor_config.can_init_config.tx_id = 4;
-    chassis_motor_config.controller_setting_init_config.motor_reverse_flag = MOTOR_DIRECTION_NORMAL;
     motor_rb = DJIMotorInit(&chassis_motor_config);
 #endif
 
@@ -168,12 +168,13 @@ static void Kinematics_calculation() {
     vt_rb = chassis_vx + chassis_vy - chassis_cmd_recv.wz * RB_CENTER;
 #endif
 
+
 #ifdef ROBOT_OMNIDIRECTIONAL
-    const float SQRT2_2 = 0.70710678118f;  // √2/2 = 0.70710678118
-    vt_lf = chassis_vx * SQRT2_2 + chassis_vy * SQRT2_2 + chassis_cmd_recv.wz * LF_CENTER;
-    vt_rf = -chassis_vx * SQRT2_2 + chassis_vy * SQRT2_2 - chassis_cmd_recv.wz * RF_CENTER;
-    vt_lb = -chassis_vx * SQRT2_2 - chassis_vy * SQRT2_2 + chassis_cmd_recv.wz * LB_CENTER;
-    vt_rb = chassis_vx * SQRT2_2 - chassis_vy * SQRT2_2 - chassis_cmd_recv.wz * RB_CENTER;
+    const float SQRT2_2 = 0.70710678118f;
+    vt_lf = ( chassis_vx + chassis_vy) * SQRT2_2 - chassis_cmd_recv.wz * LF_CENTER;
+    vt_rf = -( chassis_vx - chassis_vy) * SQRT2_2 + chassis_cmd_recv.wz * RF_CENTER;
+    vt_lb = -( chassis_vx - chassis_vy) * SQRT2_2 - chassis_cmd_recv.wz * LB_CENTER;
+    vt_rb = ( chassis_vx + chassis_vy) * SQRT2_2 + chassis_cmd_recv.wz * RB_CENTER;
 #endif
 }
 
@@ -215,7 +216,7 @@ static void LimitPowerCalculate() {
     // 直接使用裁判系统限制减去10再加上误差作为最终功率限制
     float final_limit = 120 - 10 + limit_error;
     if (final_limit < 0) {
-        SetPowerLimit(50); // 安全值
+        SetPowerLimit(100); // 安全值
     } else {
         SetPowerLimit(final_limit);
     }

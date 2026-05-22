@@ -41,4 +41,4 @@
   */
  void SetPowerLimit(float power_limit);
  #endif // !DJI_MOTOR_H
- 
+

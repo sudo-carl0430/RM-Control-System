@@ -18,5 +18,5 @@ void robot_init(void)
     ChassisInit();
 //	RefereeSend(tx_buffer,3);
     ShootInit();
-    DM_IMU_Init();
+//    DM_IMU_Init();
 }

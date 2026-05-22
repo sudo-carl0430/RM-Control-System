@@ -23,7 +23,7 @@ static void imu_set_active_mode_delay(uint32_t delay_ms);
 static imu_t imu;   // 模块内部静态变量，外部不可见
 
 /* ---------- 转换工具（内部使用）---------- */
-static int float_to_uint(float x_float, float x_min, float x_max, int bits) {
+__attribute__((unused)) static int float_to_uint(float x_float, float x_min, float x_max, int bits) {
     float span = x_max - x_min;
     float offset = x_min;
     return (int)((x_float - offset) * ((float)((1 << bits) - 1)) / span);
@@ -68,7 +68,7 @@ static CANInstance* imu_register(CAN_HandleTypeDef *can_handle, uint32_t tx_id, 
 static void imu_write_reg(uint8_t reg_id, uint32_t data) {
     imu_send_cmd(reg_id, 0x01, data);   // 0x01 = CMD_WRITE
 }
-static void imu_read_reg(uint8_t reg_id) {
+__attribute__((unused)) static void imu_read_reg(uint8_t reg_id) {
     imu_send_cmd(reg_id, 0x00, 0);      // 0x00 = CMD_READ
 }
 
@@ -149,3 +149,4 @@ static void IMU_UpdateData(uint8_t* pData) {
  imu_t* imu_get_data(void) {
     return &imu;
 }
+ 

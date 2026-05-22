@@ -2,6 +2,6 @@
 #define robot_H
 
 
-void robot_init();
+void robot_init(void);
 
 #endif // !GIMBAL_CMD_H

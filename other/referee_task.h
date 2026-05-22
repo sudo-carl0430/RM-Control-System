@@ -14,12 +14,12 @@ referee_info_t *Referee_Interactive_init(UART_HandleTypeDef *referee_usart_handl
  * @brief 在referee task之前调用,添加在freertos.c中
  * 
  */
-void My_UI_init();
+void My_UI_init(void);
 
 /**
  * @brief 裁判系统交互任务(UI和多机通信)
  *
  */
-void Referee_Interactive_task();
+void Referee_Interactive_task(void);
 
 #endif // REFEREE_H

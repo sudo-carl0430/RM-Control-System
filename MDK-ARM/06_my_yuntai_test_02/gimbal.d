@@ -90,3 +90,4 @@
 06_my_yuntai_test_02\gimbal.o: ../Core/Inc/usart.h
 06_my_yuntai_test_02\gimbal.o: ../Core/Inc/main.h
 06_my_yuntai_test_02\gimbal.o: ..\other\vofa.h
+06_my_yuntai_test_02\gimbal.o: d:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h

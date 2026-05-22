@@ -166,6 +166,7 @@ DJIMotorInstance *DJIMotorInit(Motor_Init_Config_s *config)
     PIDInit(&instance->motor_controller.angle_PID, &config->controller_param_init_config.angle_PID);
     instance->motor_controller.other_angle_feedback_ptr = config->controller_param_init_config.other_angle_feedback_ptr;
     instance->motor_controller.other_speed_feedback_ptr = config->controller_param_init_config.other_speed_feedback_ptr;
+
     instance->motor_controller.Gravity_Compensation = config->controller_param_init_config.Gravity_Compensation;
 
     instance->motor_controller.current_feedforward_ptr = config->controller_param_init_config.current_feedforward_ptr;
@@ -230,7 +231,7 @@ void DJIMotorControl()
     Motor_Control_Setting_s *motor_setting; // 电机控制参数
     Motor_Controller_s *motor_controller;   // 电机控制器
     DJI_Motor_Measure_s *measure;           // 电机测量值
-    float pid_measure, pid_ref;             // 电机PID测量值和设定值
+    float pid_measure, pid_ref,Torque_feedforword;             // 电机PID测量值和设定值
 
     // 遍历所有电机实例,进行串级PID的计算并设置发送报文的值
     for (size_t i = 0; i < idx; ++i)
@@ -240,6 +241,8 @@ void DJIMotorControl()
         motor_controller = &motor->motor_controller;
         measure = &motor->measure;
         pid_ref = motor_controller->pid_ref; // 保存设定值,防止motor_controller->pid_ref在计算过程中被修改
+        Torque_feedforword = *motor->motor_controller.Gravity_Compensation;
+
         if (motor_setting->motor_reverse_flag == MOTOR_DIRECTION_REVERSE)
             pid_ref *= -1;
         // pid_ref会顺次通过被启用的闭环充当数据的载体
@@ -266,19 +269,19 @@ void DJIMotorControl()
                 pid_measure = measure->speed_aps;
             // 更新pid_ref进入下一个环
             pid_ref = PIDCalculate(&motor_controller->speed_PID, pid_measure, pid_ref);
-            pid_ref += *motor->motor_controller.Gravity_Compensation;
+           // pid_ref += *motor->motor_controller.Gravity_Compensation;
         }
 
         // 计算电流环,目前只要启用了电流环就计算,不管外层闭环是什么,并且电流只有电机自身传感器的反馈
         if ((motor_setting->outer_loop_type & CURRENT_LOOP)|| (motor_setting->close_loop_type & CURRENT_LOOP))
         {   
             if(motor_setting->feedforward_flag & CURRENT_FEEDFORWARD)
-                pid_ref += *motor->motor_controller.current_feedforward_ptr;
-                
+                pid_ref += *motor->motor_controller.current_feedforward_ptr;        
             pid_ref = PIDCalculate(&motor_controller->current_PID, measure->real_current, pid_ref);
         }
 
         // 获取最终输出
+        pid_ref += Torque_feedforword; 
         set = (int16_t)pid_ref;
         if (motor_setting->feedback_reverse_flag == FEEDBACK_DIRECTION_REVERSE)
             set *= -1;

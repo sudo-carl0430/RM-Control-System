@@ -16,6 +16,11 @@
         "spi.h": "c",
         "dm_imu.h": "c",
         "stm32f4xx_hal.h": "c",
-        "robot_cmd.h": "c"
+        "robot_cmd.h": "c",
+        "alg_slope.h": "c",
+        "dji_motor.h": "c",
+        "string.h": "c",
+        "master_process.h": "c",
+        "gimbal.h": "c"
     }
 }

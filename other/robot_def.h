@@ -229,7 +229,7 @@ typedef struct
 
     uint8_t rest_heat;           // 剩余枪口热量
     Bullet_Speed_e bullet_speed; // 弹速限制
-    Self_Color_e self_color;;   // 0 for blue, 1 for red
+    Self_Color_e self_color;  // 0 for blue, 1 for red
     uint8_t robot_level;
     uint8_t chassis_power_buffer;
 } Chassis_Upload_Data_s;
